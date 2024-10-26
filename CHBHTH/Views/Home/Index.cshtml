@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "CUAHANGTAPHOA";
+
+    Layout = "~/Views/Shared/_LayoutClient2.cshtml";
+}
+@using CHBHTH.Models;
+
+
+<br />
+<header class="bg-body py-0">
+    <center>
+        <div class="row">
+            <div class="col-md-16">
+                <img src="https://anviethouse.vn/wp-content/uploads/2021/12/Thiet-ke-sieu-thi-mini-2-5.jpg" width="80%" />
+            </div>
+        </div>
+    </center>
+</header>
+<br />
+<div class="spnoibat">
+    <center>
+        <div class="row">
+            <div class="col-md-4">
+                <img src="~/Images/" class="img-responsive" alt="" width="80%" />
+            </div>
+            <div class="col-md-4">
+                <img src="~/Images/" class="img-responsive" alt="" width="80%" />
+            </div>
+            <div class="col-md-4">
+                <img src="~/Images/" class="img-responsive" alt="" width="80%" />
+            </div>
+        </div>
+    </center>
+</div> <br />
+
+    @Html.Action("suapartial","sanpham")
+
+    @Html.Action("dauanpartial","sanpham")
+
+    @Html.Action("raupartial","sanpham")
+
+

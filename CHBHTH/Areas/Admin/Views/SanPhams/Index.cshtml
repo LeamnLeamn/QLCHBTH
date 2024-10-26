@@ -1,0 +1,111 @@
+﻿@model IEnumerable<CHBHTH.Models.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Sản phẩm</h2>
+
+<p>
+    @Html.ActionLink("Tạo sản phẩm", "Create")
+</p>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoaiHang.TenLoai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NhaCungCap.TenNCC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Soluong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AnhSP)
+        </th>
+        <th>
+            Trạng thái
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoaiHang.TenLoai)
+                <!--
+                    <select class="form-control">
+                    <option value="">Mì</option> 
+                    <option value="">Rau</option>
+                    <option>Đồ gia dụng</option>
+                    <option>Gia vị</option>
+                    <option>Bánh</option>
+
+
+                </select>
+                -->
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NhaCungCap.TenNCC)
+                <!--<select class="form-control">
+                    <option value="">Công ty TNHH Shopee</option>
+                    <option value="">Công ty TNHH GHTK</option>
+                    <option value="">Công ty TNHH BHX</option>
+                    <option value="">Công ty TNHH CoopFood</option>
+                    <option>Bánh</option>
+                </select>-->
+            </td>
+            <td>
+                @String.Format("{0:0,0}", item.GiaBan) VNĐ
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Soluong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoTa)
+            </td>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.AnhSP)" width="100px" height="100px" />
+            </td>
+            
+            <td style="">
+                <button class="btn btn-primary">
+                    @Html.ActionLink("Xem", "Details", new { id = item.MaSP }, new { @style = "color:white;" })
+                </button>
+
+                <button class="btn btn-primary">
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.MaSP }, new { @style = "color:white;" })
+                </button>
+
+                <button class="btn btn-primary">
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.MaSP }, new { @style = "color:white;" })
+                </button>
+            </td>
+
+               
+                
+           
+        </tr>
+    }
+</table>
+

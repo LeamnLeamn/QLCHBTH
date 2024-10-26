@@ -1,0 +1,100 @@
+﻿@model IEnumerable<CHBHTH.Models.ThongKes>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!--
+    <br />
+
+<center><h2 style="color:red">Top 5 khách hàng mua hàng nhiều nhất</h2></center>
+<br />
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            Tên khách hàng
+        </th>
+        <th>
+            Số điện thoại
+        </th>
+        <th>
+            Tổng tiền đã mua
+        </th>
+        <th>
+            Số lượng đơn hàng
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tennguoidung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dienthoai)
+            </td>
+            <td>
+                @String.Format("{0:0,0}", item.Tongtien) VNĐ
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Soluong)
+            </td>
+        </tr>
+    }
+
+</table>
+
+-->
+<br />
+
+<center><h2 style="color:red">Thống kê Khách hàng mua hàng nhiều nhất</h2></center>
+<br />
+
+<!-- Chart container -->
+<canvas id="customerChart" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Prepare data for the chart using Razor syntax to embed model data into JS
+    var customerNames = @Html.Raw(Json.Encode(Model.Select(x => x.Tennguoidung).ToList()));
+    var totalAmount = @Html.Raw(Json.Encode(Model.Select(x => x.Tongtien).ToList()));
+    var orderCount = @Html.Raw(Json.Encode(Model.Select(x => x.Soluong).ToList()));
+
+    // Create the chart
+    var ctx = document.getElementById('customerChart').getContext('2d');
+    var customerChart = new Chart(ctx, {
+        type: 'bar', // You can change this to 'line', 'pie', etc.
+        data: {
+            labels: customerNames, // X-axis labels (customer names)
+            datasets: [{
+                label: 'Tổng tiền đã mua (VNĐ)',
+                data: totalAmount, // Y-axis data for total amount spent
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }, {
+                label: 'Số lượng đơn hàng',
+                data: orderCount, // Y-axis data for number of orders
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            }
+        }
+    });
+</script>
